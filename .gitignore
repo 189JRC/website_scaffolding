@@ -192,4 +192,4 @@ cython_debug/
 git_ignore/
 DONTREADME.md
 
-.github/
+.github
