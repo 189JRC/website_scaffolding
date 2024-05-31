@@ -191,3 +191,5 @@ cython_debug/
 # for local development
 git_ignore/
 DONTREADME.md
+
+.github/
