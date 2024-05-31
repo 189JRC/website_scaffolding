@@ -38,14 +38,14 @@ jobs:
         mkdir -p ~/.ssh
         
         # Add known hosts to avoid SSH prompts
-        ssh-keyscan -H 176.58.96.53 >> ~/.ssh/known_hosts
+        ssh-keyscan -H ${{ secrets.WEB_URL }} >> ~/.ssh/known_hosts
 
     - name: Copy files to remote server
-      run: scp -o StrictHostKeyChecking=no -r ./* root@176.58.96.53:/root/production_dir
+      run: scp -o StrictHostKeyChecking=no -r ./* root@${{ secrets.WEB_URL }}:/root/production_dir
 
     - name: Create and activate virtual environment on remote server
       run: |
-        ssh -o StrictHostKeyChecking=no root@176.58.96.53 << 'EOF'
+        ssh -o StrictHostKeyChecking=no root@${{ secrets.WEB_URL }} << 'EOF'
           cd /root/production_dir
           python3 -m venv venv
           source venv/bin/activate
@@ -55,7 +55,7 @@ jobs:
     
     - name: SSH and deploy
       run: |
-        ssh -o StrictHostKeyChecking=no root@176.58.96.53 << 'EOF'
+        ssh -o StrictHostKeyChecking=no root@${{ secrets.WEB_URL }} << 'EOF'
           echo "SSH AND DEPLOY"
           cd /root/production_dir
           source venv/bin/activate
