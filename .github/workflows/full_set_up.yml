@@ -3,7 +3,7 @@ name: Deploy to Linode
 on:
   push:
     branches:
-      - main
+      - master
 
 env:
   # Use the same ssh-agent socket value across all jobs
