@@ -40,6 +40,12 @@ jobs:
         # Add known hosts to avoid SSH prompts
         ssh-keyscan -H ${{ secrets.WEB_URL }} >> ~/.ssh/known_hosts
 
+    - name: Set up profuction directory
+      run: |
+        ssh -o StrictHostKeyChecking=no root@${{ secrets.WEB_URL }} << 'EOF'
+          mkdir -p /root/production_dir
+        EOF
+
     - name: Copy files to remote server
       run: scp -o StrictHostKeyChecking=no -r ./* root@${{ secrets.WEB_URL }}:/root/production_dir
 
