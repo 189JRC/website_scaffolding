@@ -21,7 +21,7 @@ frontend accessible on http://0.0.0.0:8080
 
 #### Testing for production.
 
-In route directory
+In root directory
 - docker-compose build --no-cache
 - docker-compose up
 

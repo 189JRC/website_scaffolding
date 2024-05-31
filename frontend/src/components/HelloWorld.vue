@@ -9,29 +9,22 @@ const count = ref(0)
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
-
-  <div class="card">
-    <button type="button" @click="count++">count is {{ count }}</button>
-    <p>
-      Edit
-      <code>components/HelloWorld.vue</code> to test HMR
-    </p>
+  <div><h1 class="mb-2 text-xl font-medium dark:text-gray-300 text-center">{{ msg }}</h1></div>
+  <hr class="mb-3 dark:text-gray-500">
+  <div class="flex justify-between items-center space-x-5">
+    
+    <div>
+      <button type="button" @click="count++"
+        class="ml-0 bg-yellow-500 text-black font-bold py-2 px-4 rounded dark:bg-yellow-600">
+        {{ count }}
+      </button>
+    </div>
+    <div class="dark:text-gray-300">
+      <code>This is the HelloWorld.vue component</code> 
+    </div>
   </div>
-
-  <p>
-    Check out
-    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"
-      >create-vue</a
-    >, the official Vue + Vite starter
-  </p>
-  <p>
-    Install
-    <a href="https://github.com/vuejs/language-tools" target="_blank">Volar</a>
-    in your IDE for a better DX
-  </p>
-  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
 </template>
+
 
 <style scoped>
 .read-the-docs {
