@@ -24,17 +24,21 @@ jobs:
     - name: Set up SSH
       run: |
         # Start the SSH agent
-        eval "$(ssh-agent -s)"
+        ssh-agent -a $SSH_AUTH_SOCK > /dev/null
         
         # Create the askpass script
-        echo "echo ${{ secrets.LINODE_SSH_KEY_PASSPHRASE }}" > ~/.ssh_askpass && chmod +x ~/.ssh_askpass
+        # echo "echo ${{ secrets.LINODE_SSH_KEY_PASSPHRASE }}" > ~/.ssh_askpass && chmod +x ~/.ssh_askpass
         
         # Add the private key to the agent using the askpass script
         echo "${{ secrets.LINODE_SSH_KEY }}" | tr -d '\r' > keyfile
         chmod 600 keyfile
-        DISPLAY=:0 SSH_ASKPASS=~/.ssh_askpass ssh-add keyfile
+        DISPLAY=:0 SSH_ASKPASS=~/.ssh_askpass ssh-add keyfile > /dev/null
         
-  
+        # Create .ssh directory
+        mkdir -p ~/.ssh
+        
+        # Add known hosts to avoid SSH prompts
+        ssh-keyscan -H ${{ secrets.WEB_URL }} >> ~/.ssh/known_hosts
 
     - name: Set up profuction directory
       run: |
